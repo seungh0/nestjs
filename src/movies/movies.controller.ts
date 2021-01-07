@@ -12,7 +12,7 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
-@Controller('movies')
+@Controller('/movies')
 export class MoviesController {
   constructor(readonly moviesService: MoviesService) {}
 
