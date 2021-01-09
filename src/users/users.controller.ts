@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
+import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 import { SignUpMemberDto } from './dto/signup-member.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
@@ -13,6 +21,8 @@ export class UsersController {
   }
 
   @Post()
+  @UseInterceptors(LoggingInterceptor)
+  @HttpCode(201)
   async signUp(@Body() signUpMemberDto: SignUpMemberDto): Promise<string> {
     await this.usersService.signUp(signUpMemberDto);
     return 'OK';
